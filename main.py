@@ -1,33 +1,23 @@
-from os import wait
-from pathlib import Path
 import json
 
-from helpers import *
+from helpers import print_to_md, print_dict, reverse_dict
 
-UNDEFINED_CAT = "ZZ-Undefined"
+if __name__ == "__main__":
+    with open("categories.json", "r", encoding="utf-8") as f:
+        item_map = reverse_dict(json.load(f))
 
-catalog_file = Path("categories.json")
-with open(catalog_file, "r", encoding="utf-8") as f:
-    catalog = json.load(f)
+    with open("test-input.txt", "r", encoding="utf-8") as f:
+        user_inp = f.read().splitlines()
 
-print("Catalog loaded...")
-print_dict(catalog)
-reverse_cat = reverse_dict(catalog)
-print(reverse_cat)
+    print(f"User input read: {user_inp}")
+    shopping_list = {}
+    for itm in user_inp:
+        ctg = item_map.get(itm)
+        if not ctg:
+            print(f"{itm}>Undefined")
+            ctg = "Undefined"
+        if not shopping_list.get(ctg):
+            shopping_list[ctg] = []
+        shopping_list[ctg].append(itm)
 
-with open("test-input.txt", "r", encoding="utf-8") as f:
-    user_inp = f.read().splitlines()
-
-print(f"User input read: {user_inp}")
-shopping_list = {}
-for itm in user_inp:
-    ctg = reverse_cat.get(itm)
-    if not ctg:
-        print(f"{itm}>Undefined")
-        ctg = UNDEFINED_CAT
-    if not shopping_list.get(ctg):
-        shopping_list[ctg] = []
-    shopping_list[ctg].append(itm)
-
-
-print_to_md(shopping_list)
+    print_to_md(shopping_list)
