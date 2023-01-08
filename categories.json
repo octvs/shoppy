@@ -1,4 +1,4 @@
 {
-"Obst & Gemuese" : ["Apfel"],
-"Milch & Kaese" : {"
+  "Obst & Gemuese": ["Apfel"],
+  "Milch & Kaese": ["Milch", "Quark"]
 }

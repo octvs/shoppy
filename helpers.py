@@ -5,5 +5,5 @@ def print_catalog(cat):
             print(f"\tItem:{itm}")
 
 
-# def reverse_catalog(d):
-#     return {}
+def reverse_catalog(d):
+    return {i: k for k in d for i in d[k]}
