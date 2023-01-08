@@ -1,5 +1,10 @@
-Apfel
-Orangen
-Milch
+Oliven,gruen
+Oliven,schwarz
+Sonnenblumenkerne
+Zitronensaft
 Brot
-
+Camembert
+Studentenfutter
+Sojamilch,banana
+Teebaumoel
+Feuchttuecher,travel
