@@ -1,4 +1,62 @@
 {
-  "Milch & Kaese": ["Milch", "Quark"],
-  "Obst & Gemuese": ["Apfel"]
+    "Gewuerze": [
+        "Chiliflocken"
+    ],
+    "Zutaten": [
+        "Pesto",
+        "Sonnenblumenkerne",
+        "Sultaninen",
+        "Zitronensaft"
+    ],
+    "Brot & Gebaeck": [
+        "Brot",
+        "Toast"
+    ],
+    "Fleisch & Fisch": [
+        "Frikadelle",
+        "Salami",
+        "Speck"
+    ],
+    "Fertig- & Tiefkuehlprodukte": [],
+    "Snacks & Suesswaren": [
+        "Erdnuesse",
+        "Studentenfutter"
+    ],
+    "Getreideprodukte": [
+        "Nudeln",
+        "Penne"
+    ],
+    "Getraenke": [],
+    "Haushalt": [],
+    "Pflege & Gesundheit": [
+        "Teebaumoel",
+        "Feuchttuecher"
+    ],
+    "Tierbedarf": [],
+    "Baumarkt & Garden": [],
+    "Milch & Kaese": [
+        "Milch",
+        "Feta",
+        "Quark",
+        "Sojamilch",
+        "Camembert",
+        "Eier",
+        "Mozzarella",
+        "Gouda"
+    ],
+    "Obst & Gemuese": [
+        "Apfel",
+        "Gurke",
+        "Karotten",
+        "Moehren",
+        "Radieschen",
+        "Tomaten"
+    ],
+    "Eingelegtes": [
+        "Oliven"
+    ],
+    "Konserven": [
+        "Tomatensosse",
+        "Bohnen"
+    ]
 }

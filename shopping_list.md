@@ -1,12 +1,30 @@
 # Shopping List 
 
-## Obst & Gemuese 
-  - [ ] Apfel
+## Brot & Gebaeck 
+
+- [ ] Brot
+
+## <turşumsu> 
+
+- [ ] Oliven *gruen*
+- [ ] Oliven *schwarz*
 
 ## Milch & Kaese 
-  - [ ] Milch
 
-## Undefined 
-  - [ ] Brot
-  - [ ] Orangen
+- [ ] Camembert
+- [ ] Sojamilch *banana*
+
+## Pflege & Gesundheit 
+
+- [ ] Feuchttuecher *travel*
+- [ ] Teebaumoel
+
+## Snacks & Suesswaren 
+
+- [ ] Studentenfutter
+
+## Zutaten 
+
+- [ ] Sonnenblumenkerne
+- [ ] Zitronensaft
 
