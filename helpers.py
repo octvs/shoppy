@@ -37,9 +37,9 @@ def print_to_md(res):
         itm_list = res.get(ctg)
         if not itm_list:  # Don't print empty categories
             continue
-        md_string += f"## {ctg} \n"
+        md_string += f"## {ctg} \n\n"
         for itm in sorted(itm_list):
-            md_string += f"  - [ ] {itm}\n"
+            md_string += f"- [ ] {itm}\n"
         md_string += "\n"
     with open("shopping_list.md", "w", encoding="utf-8") as file:
         file.write(md_string)
