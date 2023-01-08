@@ -63,7 +63,11 @@ def print_to_md(res):
             continue
         md_string += f"## {ctg} \n\n"
         for itm in sorted(itm_list):
-            md_string += f"- [ ] {itm}\n"
+            inp = itm.split(",")  # split to check details
+            line = f"- [ ] {inp[0]}\n"
+            if len(inp) > 1:  # in case there are details
+                line = line[:-1] + f" *{inp[1]}*\n"
+            md_string += line
         md_string += "\n"
 
     print("Shopping list updated.")
