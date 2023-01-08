@@ -1,17 +1,20 @@
-def print_dict(d):
+"""Some helper funcs for shoppy"""
+
+
+def print_dict(dct):
     """
     Pretty prints the dicts that have lists as values
     """
-    for k in d:
+    for k in dct:
         print(f"Key:{k}")
-        assert isinstance(d[k], list)
-        for i in d[k]:
+        assert isinstance(dct[k], list)
+        for i in dct[k]:
             print(f"\tValue:{i}")
 
 
-def reverse_dict(d):
+def reverse_dict(dct):
     """Reverse a dict"""
-    return {i: k for k in d for i in d[k]}
+    return {i: k for k in dct for i in dct[k]}
 
 
 def print_to_md(res):
@@ -20,8 +23,8 @@ def print_to_md(res):
     This format is simply headers for categories and checklist for each items
     """
     # Get store order
-    with open("store-order.txt", "r", encoding="utf-8") as f:
-        store_order = f.read().splitlines()
+    with open("store-order.txt", "r", encoding="utf-8") as file:
+        store_order = file.read().splitlines()
 
     # Append non-existing categories to it
     for ctg in sorted(res.keys()):
@@ -38,5 +41,5 @@ def print_to_md(res):
         for itm in sorted(itm_list):
             md_string += f"  - [ ] {itm}\n"
         md_string += "\n"
-    with open("shopping_list.md", "w", encoding="utf-8") as f:
-        f.write(md_string)
+    with open("shopping_list.md", "w", encoding="utf-8") as file:
+        file.write(md_string)
