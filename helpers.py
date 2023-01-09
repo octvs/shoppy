@@ -41,7 +41,7 @@ def read_user_input():
     return shopping_list
 
 
-def craete_shoplist(res):
+def create_shoplist(res):
     """
     Prints the dict in shopping list format
     """
