@@ -1,5 +1,9 @@
 # Shopping List 
 
+## Salat & Smoothies 
+
+Salat-Dressing *Sylter Art*
+
 ## Obst & Gemuese 
 
 Gurke
@@ -32,8 +36,4 @@ Zitronensaft
 
 Feuchttuecher *travel*
 Teebaumoel
-
-## Undefined 
-
-Salat-Dressing *Sylter Art*
 
