@@ -41,10 +41,9 @@ def read_user_input():
     return shopping_list
 
 
-def print_to_md(res):
+def craete_shoplist(res):
     """
     Prints the dict in shopping list format
-    This format is simply headers for categories and checklist for each items
     """
     # Get store order
     with open("store-order.txt", "r", encoding="utf-8") as file:
@@ -64,12 +63,14 @@ def print_to_md(res):
         md_string += f"## {ctg} \n\n"
         for itm in sorted(itm_list):
             inp = itm.split(",")  # split to check details
-            line = f"- [ ] {inp[0]}\n"
+            line = f"{inp[0]}\n"
+            # line = f"- [ ] {inp[0]}\n"
             if len(inp) > 1:  # in case there are details
                 line = line[:-1] + f" *{inp[1]}*\n"
             md_string += line
         md_string += "\n"
 
     print("Shopping list updated.")
-    with open("shopping_list.md", "w", encoding="utf-8") as file:
+    # with open("shopping_list.md", "w", encoding="utf-8") as file:
+    with open("shopping_list.txt", "w", encoding="utf-8") as file:
         file.write(md_string)
