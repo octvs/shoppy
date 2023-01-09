@@ -1,30 +1,35 @@
 # Shopping List 
 
-## Brot & Gebaeck 
-
-- [ ] Brot
-
-## <turşumsu> 
+## Eingelegtes 
 
 - [ ] Oliven *gruen*
 - [ ] Oliven *schwarz*
 
+## Brot & Gebaeck 
+
+- [ ] Brot
+
+## Snacks & Suesswaren 
+
+- [ ] Studentenfutter
+
 ## Milch & Kaese 
 
 - [ ] Camembert
+- [ ] Eier
 - [ ] Sojamilch *banana*
+
+## Zutaten 
+
+- [ ] Sonnenblumenkerne
+- [ ] Zitronensaft
 
 ## Pflege & Gesundheit 
 
 - [ ] Feuchttuecher *travel*
 - [ ] Teebaumoel
 
-## Snacks & Suesswaren 
+## Undefined 
 
-- [ ] Studentenfutter
-
-## Zutaten 
-
-- [ ] Sonnenblumenkerne
-- [ ] Zitronensaft
+- [ ] Salat-Dressing
 

@@ -8,3 +8,6 @@ Studentenfutter
 Sojamilch,banana
 Teebaumoel
 Feuchttuecher,travel
+Salat-Dressing,Sylter Art
+Eier
+Gurke
