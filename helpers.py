@@ -1,4 +1,4 @@
-"""Some helper funcs for shoppy"""
+"""shoppy, a simple script as a minimalist replacement for shopping list apps"""
 
 import json
 from pathlib import Path
@@ -101,3 +101,8 @@ def post_shop_update():
     print("Post-shopping update is done.")
     with open(data_dir.joinpath("shoppy_order.txt"), "w", encoding="utf-8") as file:
         file.write(txt_string[:-1])
+
+
+if __name__ == "__main__":
+    shopping_list = read_user_input()
+    create_shoplist(shopping_list)
