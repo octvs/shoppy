@@ -4,8 +4,8 @@ import json
 from pathlib import Path
 
 config_dir = Path.home().joinpath(".config/shoppy/")
-with open(config_dir.joinpath("config.json"), "r", encoding="utf-8") as file:
-    data_dir = Path(json.load(file)["data_dir"])
+with open(config_dir.joinpath("config.json"), "r", encoding="utf-8") as file_handle:
+    data_dir = Path(json.load(file_handle)["data_dir"])
 
 
 def print_dict(dct):
