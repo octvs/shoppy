@@ -1,0 +1,11 @@
+#!/bin/sh
+
+GITDIR="/home/ctaskin/git/"
+case "$1" in
+p)
+	python "$GITDIR/shoppy/post.py"
+	;;
+*)
+	python "$GITDIR/shoppy/main.py"
+	;;
+esac
