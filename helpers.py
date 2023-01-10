@@ -3,6 +3,10 @@
 import json
 from pathlib import Path
 
+config_dir = Path.home().joinpath(".config/shoppy/")
+with open(config_dir.joinpath("config.json"), "r", encoding="utf-8") as file:
+    data_dir = Path(json.load(file)["data_dir"])
+
 
 def print_dict(dct):
     """
@@ -20,15 +24,11 @@ def reverse_dict(dct):
     return {i: k for k in dct for i in dct[k]}
 
 
-def read_config():
-    """Reads user config.json for data_dir"""
-    config_dir = Path.home().joinpath(".config/shoppy/")
-    with open(config_dir.joinpath("config.json"), "r", encoding="utf-8") as file:
-        config = json.load(file)
-    with open(config_dir.joinpath("categories.json"), "r", encoding="utf-8") as file:
+def read_categories():
+    """Reads categories file"""
+    with open(data_dir.joinpath("categories.json"), "r", encoding="utf-8") as file:
         item_map = reverse_dict(json.load(file))
-
-    return Path(config["data_dir"]), item_map
+    return item_map
 
 
 def read_user_input():
@@ -36,7 +36,7 @@ def read_user_input():
     Reads user input from a txt file
     Returns a dictionary separated into categories ignoring blank lines
     """
-    data_dir, item_map = read_config()
+    item_map = read_categories()
 
     # Read user input while filtering empty lines
     with open(data_dir.joinpath("shoppy_order.txt"), "r", encoding="utf-8") as file:
@@ -57,7 +57,6 @@ def create_shoplist(res):
     """
     Prints the dict in shopping list format
     """
-    data_dir, _ = read_config()
     # Get store order
     with open(data_dir.joinpath("shoppy_order.txt"), "r", encoding="utf-8") as file:
         store_order = file.read().splitlines()
@@ -76,11 +75,10 @@ def create_shoplist(res):
         md_string += f"## {ctg} \n\n"
         for itm in sorted(itm_list):
             inp = itm.split(",")  # split to check details
-            line = f"{inp[0]}\n"
+            md_string += f"{inp[0]}\n"
             # line = f"- [ ] {inp[0]}\n"
             if len(inp) > 1:  # in case there are details
-                line = line[:-1] + f" _{inp[1]}_\n"
-            md_string += line
+                md_string = md_string[:-1] + f" _{inp[1]}_\n"
         md_string += "\n"
 
     print("Shopping list updated.")
@@ -90,18 +88,16 @@ def create_shoplist(res):
 
 def post_shop_update():
     """Cleans input file of shopped items, post shopping"""
-    data_dir, _ = read_config()
     with open(data_dir.joinpath("shoppy_list.md"), "r", encoding="utf-8") as file:
         old_list = list(filter(None, file.read().splitlines()))
     old_list = [a for a in old_list if a[0] != "#"]
-    res = ""
+    txt_string = ""
     for item in old_list:
-        if "_" in item:
-            prod, detail = item.split()
-            res += f"{prod},{detail[1:-1]}\n"
-        else:
-            res += f"{item}\n"
+        itm = item.split("_")
+        txt_string += f"{itm[0]}\n"
+        if len(itm) > 1:
+            txt_string = txt_string[:-2] + f",{itm[1]}\n"
 
     print("Post-shopping update is done.")
     with open(data_dir.joinpath("shoppy_order.txt"), "w", encoding="utf-8") as file:
-        file.write(res[:-1])
+        file.write(txt_string[:-1])
