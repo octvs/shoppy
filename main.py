@@ -67,12 +67,12 @@ def create_shoplist(res):
             store_order.append(ctg)
 
     # Print to markdown format
-    md_string = "# Shopping List \n\n"
+    md_string = "# Shopping List\n\n"
     for ctg in store_order:
         itm_list = res.get(ctg)
         if not itm_list:  # Don't print empty categories
             continue
-        md_string += f"## {ctg} \n\n"
+        md_string += f"## {ctg}\n\n"
         for itm in sorted(itm_list):
             inp = itm.split(",")  # split to check details
             md_string += f"{inp[0]}\n"
