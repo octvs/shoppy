@@ -1,11 +1,11 @@
 """shoppy, a simple script as a minimalist replacement for shopping list apps"""
 
+import sys
 import json
 from pathlib import Path
 
-config_dir = Path.home().joinpath(".config/shoppy/")
-with open(config_dir.joinpath("config.json"), "r", encoding="utf-8") as file_handle:
-    data_dir = Path(json.load(file_handle)["data_dir"])
+# The following was on a config.py before but it was unnecessary
+data_dir = Path.home().joinpath("git/notes/shoppy/")
 
 
 def print_dict(dct):
@@ -43,14 +43,14 @@ def read_user_input():
         user_inp = list(filter(None, file.read().splitlines()))
 
     print(f"User input read: {user_inp}")
-    shopping_list = {}
+    shop_list = {}
     for itm in user_inp:
         ctg = item_map.get(itm.split(",")[0], "Undefined")
-        if not shopping_list.get(ctg):
-            shopping_list[ctg] = []
-        shopping_list[ctg].append(itm)
+        if not shop_list.get(ctg):
+            shop_list[ctg] = []
+        shop_list[ctg].append(itm)
 
-    return shopping_list
+    return shop_list
 
 
 def create_shoplist(res):
@@ -104,5 +104,8 @@ def post_shop_update():
 
 
 if __name__ == "__main__":
-    shopping_list = read_user_input()
-    create_shoplist(shopping_list)
+    if sys.argv[1] != "post":
+        shopping_list = read_user_input()
+        create_shoplist(shopping_list)
+    else:
+        post_shop_update()
