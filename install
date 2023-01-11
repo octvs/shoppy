@@ -2,7 +2,7 @@
 
 target="$HOME/.local/bin/shoppy"
 if [ ! -e $target ]; then
-	if command -v termux-setup-storage; then # then we're in termux
+	if command -v termux-setup-storage >/dev/null; then # then we're in termux
 		printf "Copying executable to .local/bin ...\n"
 		cp shoppy $target
 		chmod u+x $target
