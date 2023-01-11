@@ -1,0 +1,10 @@
+#!/bin/sh
+
+target="$HOME/.local/bin/shoppy"
+if [ ! -e $target ]; then
+	printf "Copying executable to .local/bin\n"
+	cp shoppy $target
+	printf "Done\n"
+else
+	printf "Executable exists\n"
+fi
