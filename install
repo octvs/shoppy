@@ -4,6 +4,7 @@ target="$HOME/.local/bin/shoppy"
 if [ ! -e $target ]; then
 	printf "Copying executable to .local/bin\n"
 	cp shoppy $target
+	chmod u+x $target
 	printf "Done\n"
 else
 	printf "Executable exists\n"
