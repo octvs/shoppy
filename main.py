@@ -7,6 +7,7 @@ from pathlib import Path
 # The following was on a config.py before but it was unnecessary
 data_dir = Path.home().joinpath("git/notes/shoppy/")
 order_file = data_dir.joinpath("shoppy_order.txt")
+store_file = data_dir.joinpath("store-layout.txt")
 list_file = data_dir.joinpath("shoppy_list.md")
 
 
@@ -60,17 +61,17 @@ def create_shoplist(res):
     Prints the dict in shopping list format
     """
     # Get store order
-    with open(order_file, "r", encoding="utf-8") as file:
-        store_order = file.read().splitlines()
+    with open(store_file, "r", encoding="utf-8") as file:
+        store_ctgs = file.read().splitlines()
 
     # Append non-existing categories to it
     for ctg in sorted(res.keys()):
-        if ctg not in store_order:
-            store_order.append(ctg)
+        if ctg not in store_ctgs:
+            store_ctgs.append(ctg)
 
     # Print to markdown format
     md_string = "# Shopping List\n\n"
-    for ctg in store_order:
+    for ctg in store_ctgs:
         itm_list = res.get(ctg)
         if not itm_list:  # Don't print empty categories
             continue
