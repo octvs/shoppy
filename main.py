@@ -6,6 +6,8 @@ from pathlib import Path
 
 # The following was on a config.py before but it was unnecessary
 data_dir = Path.home().joinpath("git/notes/shoppy/")
+order_file = data_dir.joinpath("shoppy_order.txt")
+list_file = data_dir.joinpath("shoppy_list.md")
 
 
 def print_dict(dct):
@@ -39,7 +41,7 @@ def read_user_input():
     item_map = read_categories()
 
     # Read user input while filtering empty lines
-    with open(data_dir.joinpath("shoppy_order.txt"), "r", encoding="utf-8") as file:
+    with open(order_file, "r", encoding="utf-8") as file:
         user_inp = list(filter(None, file.read().splitlines()))
 
     print(f"User input read: {user_inp}")
@@ -58,7 +60,7 @@ def create_shoplist(res):
     Prints the dict in shopping list format
     """
     # Get store order
-    with open(data_dir.joinpath("shoppy_order.txt"), "r", encoding="utf-8") as file:
+    with open(order_file, "r", encoding="utf-8") as file:
         store_order = file.read().splitlines()
 
     # Append non-existing categories to it
@@ -75,32 +77,33 @@ def create_shoplist(res):
         md_string += f"## {ctg}\n\n"
         for itm in sorted(itm_list):
             inp = itm.split(",")  # split to check details
-            md_string += f"{inp[0]}\n"
-            # line = f"- [ ] {inp[0]}\n"
+            md_string += f"- [ ] {inp[0]}\n"
             if len(inp) > 1:  # in case there are details
                 md_string = md_string[:-1] + f" _{inp[1]}_\n"
         md_string += "\n"
 
     print("Shopping list updated.")
-    with open(data_dir.joinpath("shoppy_list.md"), "w", encoding="utf-8") as file:
+    with open(list_file, "w", encoding="utf-8") as file:
         file.write(md_string)
 
 
 def post_shop_update():
     """Cleans input file of shopped items, post shopping"""
-    with open(data_dir.joinpath("shoppy_list.md"), "r", encoding="utf-8") as file:
-        old_list = list(filter(None, file.read().splitlines()))
-    old_list = [a for a in old_list if a[0] != "#"]
+    with open(list_file, "r", encoding="utf-8") as file:
+        old_list = list(filter(lambda x: x[:5] == "- [ ]", file.read().splitlines()))
+
     txt_string = ""
     for item in old_list:
-        itm = item.split("_")
+        itm = item[6:].split("_")
         txt_string += f"{itm[0]}\n"
         if len(itm) > 1:
             txt_string = txt_string[:-2] + f",{itm[1]}\n"
 
     print("Post-shopping update is done.")
-    with open(data_dir.joinpath("shoppy_order.txt"), "w", encoding="utf-8") as file:
+    with open(order_file, "w", encoding="utf-8") as file:
         file.write(txt_string[:-1])
+
+    list_file.unlink()
 
 
 if __name__ == "__main__":
