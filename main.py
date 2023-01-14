@@ -48,7 +48,7 @@ def read_user_input():
     print(f"User input read: {user_inp}")
     shop_list = {}
     for itm in user_inp:
-        ctg = item_map.get(itm.split(",")[0], "Undefined")
+        ctg = item_map.get(itm.split(",")[0].strip(), "Undefined")
         if not shop_list.get(ctg):
             shop_list[ctg] = []
         shop_list[ctg].append(itm)
