@@ -80,7 +80,7 @@ def create_shoplist(res):
             inp = itm.split(",")  # split to check details
             md_string += f"- [ ] {inp[0]}\n"
             if len(inp) > 1:  # in case there are details
-                md_string = md_string[:-1] + f" _{inp[1]}_\n"
+                md_string = md_string[:-1] + f" _{inp[1].strip()}_\n"
         md_string += "\n"
 
     print("Shopping list updated.")
