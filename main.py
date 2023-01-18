@@ -90,6 +90,10 @@ def create_shoplist(res):
 
 def post_shop_update():
     """Cleans input file of shopped items, post shopping"""
+
+    if not list_file.exists():
+        exit("There is no shopping list to post process")
+
     with open(list_file, "r", encoding="utf-8") as file:
         old_list = list(filter(lambda x: x[:5] == "- [ ]", file.read().splitlines()))
 
