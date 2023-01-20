@@ -4,11 +4,17 @@ import sys
 import json
 from pathlib import Path
 
-# The following was on a config.py before but it was unnecessary
-data_dir = Path.home().joinpath("git/notes/shoppy/")
-order_file = data_dir.joinpath("shoppy_order.txt")
-store_file = data_dir.joinpath("store-layout.txt")
-list_file = data_dir.joinpath("shoppy_list.md")
+config_path = Path.home().joinpath(".config/shoppy/")
+if config_path.joinpath("config.py").exists():
+    sys.path.append(str(config_path))
+    from config import data_dir  # pyright:ignore
+else:
+    exit("Please define a data directory on the configuration file.")
+
+data_path = Path.home().joinpath(data_dir)
+order_file = data_path.joinpath("shoppy_order.txt")
+store_file = data_path.joinpath("store-layout.txt")
+list_file = data_path.joinpath("shoppy_list.md")
 
 
 def print_dict(dct):
@@ -29,7 +35,7 @@ def reverse_dict(dct):
 
 def read_categories():
     """Reads categories file"""
-    with open(data_dir.joinpath("categories.json"), "r", encoding="utf-8") as file:
+    with open(data_path.joinpath("categories.json"), "r", encoding="utf-8") as file:
         item_map = reverse_dict(json.load(file))
     return item_map
 

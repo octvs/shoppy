@@ -4,3 +4,8 @@ input format: a single item per line txt file, details can be added trailing wit
 
 ordering: edit the store-order.txt file with category names. might sound like a weird feature but try to shop from a huge supermarket, it comes in handy.
 
+config: place a config.py file at $HOME/.config/shoppy/
+
+Config file arguments
+    data_dir: str, path to where categories and the input/output lists will be stored.
+
