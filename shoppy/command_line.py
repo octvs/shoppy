@@ -8,7 +8,7 @@ def main():
         create_shoplist(shopping_list)
     else:
         match sys.argv[1]:
-            case ["p", "post"]:
+            case "p" | "post":
                 post_shop_update()
             case _:
                 exit("Unexpected argument!")
