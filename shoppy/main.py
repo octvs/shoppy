@@ -1,13 +1,10 @@
-"""shoppy, a simple script as a minimalist replacement for shopping list apps"""
-
-import sys
 import json
 from pathlib import Path
 
-config_path = Path.home().joinpath(".config/shoppy/")
-if config_path.joinpath("config.py").exists():
-    sys.path.append(str(config_path))
-    from config import data_dir  # pyright:ignore
+config_file = Path.home().joinpath(".config/shoppy/config.json")
+if config_file.exists():
+    with open(config_file, "r", encoding="utf-8") as file:
+        data_dir = json.load(file)["data_dir"]
 else:
     exit("Please define a data directory on the configuration file.")
 
@@ -115,11 +112,3 @@ def post_shop_update():
         file.write(txt_string[:-1])
 
     list_file.unlink()
-
-
-if __name__ == "__main__":
-    if sys.argv[1] != "post":
-        shopping_list = read_user_input()
-        create_shoplist(shopping_list)
-    else:
-        post_shop_update()
