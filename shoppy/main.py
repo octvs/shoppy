@@ -93,7 +93,8 @@ def create_shoplist(res):
         file.write(md_string)
 
     # Write undefined items to a list to be checked later
-    log_undefined_items(res["Undefined"])
+    if res.get("Undefined"):
+        log_undefined_items(res)
 
 
 def log_undefined_items(und):
