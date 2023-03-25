@@ -1,4 +1,5 @@
 import json
+import logging
 from pathlib import Path
 
 config_file = Path.home().joinpath(".config/shoppy/config.json")
@@ -12,6 +13,7 @@ data_path = Path.home().joinpath(data_dir)
 order_file = data_path.joinpath("shoppy_order.txt")
 store_file = data_path.joinpath("store-layout.txt")
 list_file = data_path.joinpath("shoppy_list.md")
+undefineds_file = data_path.joinpath("undefined-items.txt")
 
 
 def print_dict(dct):
@@ -48,7 +50,7 @@ def read_user_input():
     with open(order_file, "r", encoding="utf-8") as file:
         user_inp = list(filter(None, file.read().splitlines()))
 
-    print(f"User input read: {user_inp}")
+    logging.debug(f"User input read: {user_inp}")
     shop_list = {}
     for itm in user_inp:
         ctg = item_map.get(itm.split(",")[0].strip(), "Undefined")
@@ -80,15 +82,34 @@ def create_shoplist(res):
             continue
         md_string += f"## {ctg}\n\n"
         for itm in sorted(itm_list):
-            inp = itm.split(",")  # split to check details
+            inp = itm.split(",")  # Split to check details
             md_string += f"- [ ] {inp[0]}\n"
-            if len(inp) > 1:  # in case there are details
+            if len(inp) > 1:  # In case there are details
                 md_string = md_string[:-1] + f" _{inp[1].strip()}_\n"
         md_string += "\n"
 
     print("Shopping list updated.")
     with open(list_file, "w", encoding="utf-8") as file:
         file.write(md_string)
+
+    # Write undefined items to a list to be checked later
+    log_undefined_items(res["Undefined"])
+
+
+def log_undefined_items(und):
+    already_known = []
+    if undefineds_file.exists():
+        with open(undefineds_file, "r", encoding="utf-8") as file:
+            already_known = file.read().splitlines()
+
+    new_und = []
+    for itm in und:
+        if itm not in already_known:
+            new_und.append(itm)
+
+    with open(undefineds_file, "a", encoding="utf-8") as file:
+        logging.debug(f"Added {len(new_und)} new items to undefineds file.")
+        file.write("\n".join(new_und) + "\n")
 
 
 def post_shop_update():
