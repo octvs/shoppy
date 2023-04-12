@@ -94,7 +94,7 @@ def create_shoplist(res):
 
     # Write undefined items to a list to be checked later
     if res.get("Undefined"):
-        log_undefined_items(res)
+        log_undefined_items(res["Undefined"])
 
 
 def log_undefined_items(und):
@@ -102,14 +102,16 @@ def log_undefined_items(und):
     if undefineds_file.exists():
         with open(undefineds_file, "r", encoding="utf-8") as file:
             already_known = file.read().splitlines()
+    logging.debug(f"Undefined items already has items {already_known}")
 
     new_und = []
     for itm in und:
         if itm not in already_known:
+            logging.debug(f"{itm} is a new undefined entry.")
             new_und.append(itm)
 
     with open(undefineds_file, "a", encoding="utf-8") as file:
-        logging.debug(f"Added {len(new_und)} new items to undefineds file.")
+        logging.debug(f"Added {len(new_und)} new items to undefined items file.")
         file.write("\n".join(new_und) + "\n")
 
 
