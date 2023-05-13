@@ -15,8 +15,6 @@ class ShoppingList:
 
     def __init__(self):
         self.read_config()
-        self.data_path = Path.home().joinpath(self.data_dir)
-        self.fpath = self.data_path.joinpath("shoppy_order.txt")
         self.read_user_input()
 
     def read_config(self):
@@ -26,6 +24,9 @@ class ShoppingList:
                 self.data_dir = json.load(file)["data_dir"]
         else:
             exit("Please define a data directory on the configuration file.")
+
+        self.data_path = Path.home().joinpath(self.data_dir)
+        self.fpath = self.data_path.joinpath("shoppy_order.txt")
 
     def read_user_input(self):
         """Read user input while filtering empty lines"""
@@ -87,21 +88,23 @@ class ShoppingList:
     def check_item(self):
         fzf_return = FzfPrompt().prompt(self.shop_list)[0]
         self.shop_list = [i for i in self.shop_list if not i == fzf_return]
+        logging.debug(f"Removed item from shopping list: {fzf_return}")
         self.write()
 
     def add_item(self):
         inp = input(f"Add item:\n")
         self.shop_list.append(inp)
+        logging.debug(f"Added new item to shopping list: {inp}")
         self.write()
 
     def write(self):
+        logging.debug(f"Wrote list to {self.fpath}")
         with open(self.fpath, "w", encoding="utf-8") as file:
             file.write("\n".join(self.shop_list))
 
     def __str__(self):
-        """
-        Prints the dict in shopping list format
-        """
+        """Prints the dict in shopping list format"""
+
         shop_dict = self.parse_input()
         self.log_undefined_items(shop_dict)
         store_ctgs = self.read_store_file()
