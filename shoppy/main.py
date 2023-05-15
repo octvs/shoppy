@@ -83,7 +83,7 @@ class ShoppingList:
 
         with open(file, "a", encoding="utf-8") as file:
             logging.debug(f"Added {len(new_und)} new items to undefined items file.")
-            file.write("\n".join(new_und))
+            file.write("\n".join(new_und) + "\n")
 
     def check_item(self):
         fzf_return = FzfPrompt().prompt(self.shop_list)[0]
