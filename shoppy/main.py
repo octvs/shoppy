@@ -125,7 +125,7 @@ class ShoppingList:
                 inp = itm.split(",")  # Split to check details
                 md_string += colored(f"- {inp[0]}", "yellow")
                 if len(inp) > 1:  # In case there are details
-                    md_string += colored(f", {inp[1].strip()}", "light_yellow")
+                    md_string += colored(f", {inp[1].strip()}", "light_grey")
                 md_string += "\n"
             md_string += "\n"
         return md_string[:-1]
