@@ -81,7 +81,9 @@ class ShoppingList:
                 logging.debug(f"{itm} is a new undefined entry.")
                 new_und.append(itm)
 
-        with open(file, "a", encoding="utf-8") as file:
+        new_und = list(filter(None, already_known + new_und))
+
+        with open(file, "w", encoding="utf-8") as file:
             logging.debug(f"Added {len(new_und)} new items to undefined items file.")
             file.write("\n".join(new_und) + "\n")
 
