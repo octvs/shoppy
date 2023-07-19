@@ -116,6 +116,12 @@ class ShoppingList:
             if ctg not in store_ctgs:
                 store_ctgs.append(ctg)
 
+        # TODO: Since we are iterating over categories this is a temporary
+        # solution, better way would be to iterate over items instead of the
+        # emtpy categories
+        if len(shop_dict) ==0 :
+            exit(colored("Shopping list empty!", "light_cyan"))
+
         # Print to terminal
         md_string = colored("# Shopping List\n\n", "cyan")
         for ctg in store_ctgs:
