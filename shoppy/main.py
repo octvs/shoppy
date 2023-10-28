@@ -115,7 +115,7 @@ class ShoppingList:
     def write(self):
         logging.debug(f"Wrote list to {self.fpath}")
         with open(self.fpath, "w", encoding="utf-8") as file:
-            file.write("\n".join(self.shop_list))
+            file.write("\n".join(self.shop_list) + "\n")
 
     def __str__(self):
         """Prints the dict in shopping list format"""
