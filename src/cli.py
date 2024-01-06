@@ -1,7 +1,8 @@
-import sys
-import os
 import logging
-from .main import ShoppingList
+import os
+import sys
+
+from main import ShoppingList
 
 short_cmds = {"c": "check", "ls": "list", "e": "edit", "a": "add"}
 
@@ -33,3 +34,7 @@ def main(args=sys.argv):
             os.system(f"$EDITOR {shopping.fpath}")
         case _:
             exit("Unexpected argument!")
+
+
+if __name__ == "__main__":
+    main()
