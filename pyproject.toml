@@ -1,8 +1,8 @@
 [project]
 name = "shoppy"
-authors= [ {name="O. C. Taskin", email="orhuncenktaskin@gmail.com"}, ]
+authors = [{ name = "O. C. Taskin", email = "orhuncenktaskin@gmail.com" }]
 version = "0.1"
-dependencies = ["pyfzf","termcolor"]
+dependencies = ["pyfzf", "termcolor"]
 description = "a simple script as a minimalist replacement for shopping list apps"
 
 [build-system]

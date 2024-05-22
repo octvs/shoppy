@@ -9,3 +9,11 @@ config: place a config.py file at $HOME/.config/shoppy/
 Config file arguments
     data_dir: str, path to where categories and the input/output lists will be stored.
 
+# TODO: Recurrent mode 
+- Add --single mode to only execute a single time otherwise behave as the
+  dmenu-bluetooth which re-prompts all the time
+- `parser.add_argument( "-s", "--single", action="store_true", help="do not run
+  in recurrent mode")`
+
+# TODO: Adding details
+- Add ability to add details on prompt
