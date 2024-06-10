@@ -1,5 +1,6 @@
 import json
 import logging
+import os
 from pathlib import Path
 
 from pyfzf.pyfzf import FzfPrompt
@@ -12,21 +13,18 @@ def reverse_dict(dct):
 
 
 class ShoppingList:
-    config_dir = Path.home().joinpath(".config/shoppy")
+    DEFAULT_DIR = Path.home().joinpath("notes/.shoppy")
 
     def __init__(self):
         self.read_config()
         self.read_user_input()
 
     def read_config(self):
-        config_file = self.config_dir.joinpath("config.json")
-        if config_file.exists():
-            with open(config_file, "r", encoding="utf-8") as file:
-                self.data_dir = json.load(file)["data_dir"]
-        else:
-            exit(f"Config file not found at {config_file}!")
-
-        self.data_path = Path.home().joinpath(self.data_dir)
+        self.data_path = Path(
+            os.environ.get("SHOPPY_DIR", str(self.DEFAULT_DIR))
+        )
+        if not self.data_path.is_dir():
+            exit(f"Dir for shoppy doesn't exists!\nProvided: {self.data_path}")
         self.fpath = self.data_path.joinpath("shoppy_order.txt")
 
     def read_user_input(self):
