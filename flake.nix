@@ -7,6 +7,7 @@
   };
 
   outputs = {
+    self,
     nixpkgs,
     flake-utils,
     ...
@@ -28,5 +29,8 @@
       };
 
       devShells.default = pkgs.mkShell {buildInputs = runtimeDeps;};
-    });
+    })
+    // {
+      overlays.default = final: prev: {shoppy = self.packages.${prev.system}.default;};
+    };
 }
