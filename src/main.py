@@ -18,6 +18,7 @@ class ShoppingList:
     def __init__(self):
         self.read_config()
         self.read_user_input()
+        self.read_categories()
 
     def read_config(self):
         self.data_path = Path(
@@ -26,6 +27,7 @@ class ShoppingList:
         if not self.data_path.is_dir():
             exit(f"Dir for shoppy doesn't exists!\nProvided: {self.data_path}")
         self.fpath = self.data_path.joinpath("shoppy_order.txt")
+        self.cat_fpath = self.data_path.joinpath("categories.json")
 
     def read_user_input(self):
         """Read user input while filtering empty lines"""
@@ -35,8 +37,7 @@ class ShoppingList:
 
     def read_categories(self):
         """Reads categories file, returns item map"""
-        file = self.data_path.joinpath("categories.json")
-        with open(file, "r", encoding="utf-8") as f:
+        with open(self.cat_fpath, "r", encoding="utf-8") as f:
             return json.load(f)
 
     def read_store_file(self):
