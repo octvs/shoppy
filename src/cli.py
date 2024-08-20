@@ -60,7 +60,7 @@ def main():
         logging.basicConfig(level=logging.DEBUG, force=True)
     logging.debug(f"Received args from shell {args}")
     if args.f is None:
-        args.f = lambda: print(shopping)
+        args.f = lambda cat: _list(shopping, cat)
 
     args.f(args.categories)
 
