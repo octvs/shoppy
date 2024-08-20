@@ -14,7 +14,7 @@
   }:
     flake-utils.lib.eachDefaultSystem (system: let
       pkgs = nixpkgs.legacyPackages.${system};
-      runtimeDeps = with pkgs.python3Packages; [pyfzf termcolor];
+      runtimeDeps = with pkgs.python3Packages; [pyfzf termcolor] ++ [pkgs.jq];
       buildDeps = with pkgs.python3Packages; [setuptools];
     in {
       packages = rec {
