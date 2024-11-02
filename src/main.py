@@ -128,9 +128,17 @@ class ShoppingList:
         store_ctgs = self.read_store_file()
 
         # Append non-existing categories from order to the store configuration
+        undefined_exists = False
         for ctg in sorted(shop_dict.keys()):
+            if ctg == "Undefined":
+                # Should be appended last, hold on for now
+                undefined_exists = True
+                continue
             if ctg not in store_ctgs:
                 store_ctgs.append(ctg)
+
+        if undefined_exists:
+            store_ctgs.append("Undefined")
 
         # Print to terminal
         md_string = colored("# Shopping List\n\n", "cyan")
