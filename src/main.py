@@ -3,6 +3,7 @@ import logging
 import os
 from pathlib import Path
 
+from emoji import emojize
 from pyfzf.pyfzf import FzfPrompt
 from termcolor import colored
 
@@ -151,7 +152,9 @@ class ShoppingList:
                 inp = itm.split(",")  # Split to check details
                 md_string += colored(f"- {inp[0]}", "yellow")
                 if len(inp) > 1:  # In case there are details
-                    md_string += colored(f", {inp[1].strip()}", "white")
+                    md_string += emojize(
+                        colored(f", {inp[1].strip()}", "white")
+                    )
                 md_string += "\n"
             md_string += "\n"
         return md_string[:-1]
