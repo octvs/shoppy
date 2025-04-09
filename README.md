@@ -37,3 +37,9 @@ input/output lists will be stored.
       self.fpath.touch()
   ```
   ````
+
+# TODO: Check rich
+
+https://github.com/Textualize/rich
+
+might be a good alternative to termcolor
