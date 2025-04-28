@@ -14,18 +14,16 @@
   }:
     flake-utils.lib.eachDefaultSystem (system: let
       pkgs = nixpkgs.legacyPackages.${system};
-      runtimeDeps = with pkgs.python3Packages; [pyfzf termcolor] ++ [pkgs.jq];
-      buildDeps = with pkgs.python3Packages; [setuptools];
+      py3 = pkgs.python3;
+      runtimeDeps = with py3.pkgs; [pyfzf termcolor] ++ [pkgs.jq];
     in {
-      packages = rec {
-        shoppy = pkgs.python3Packages.buildPythonApplication {
-          pname = "shoppy";
-          version = "0.1";
-          pyproject = true;
-          propagatedBuildInputs = runtimeDeps ++ buildDeps;
-          src = ./.;
-        };
-        default = shoppy;
+      packages.default = pkgs.python3Packages.buildPythonApplication {
+        pname = "shoppy";
+        version = "0-unstable";
+        pyproject = true;
+        src = ./.;
+        build-system = with py3.pkgs; [setuptools];
+        dependencies = runtimeDeps;
       };
 
       devShells.default = pkgs.mkShell {buildInputs = runtimeDeps;};

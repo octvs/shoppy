@@ -1,8 +1,15 @@
+# Make CLI runnable from source tree with `python src/package`
+if not __package__:
+    import sys
+    from pathlib import Path
+
+    sys.path.insert(0, str(Path(__file__).parent.parent))
+
 import argparse
 import logging
 import os
 
-from main import ShoppingList
+from shoppy import ShoppingList
 
 # TODO: Sort all json keys everytime the file is written or read
 # TODO: Remove the TODO from README, maybe add it to trackdown
