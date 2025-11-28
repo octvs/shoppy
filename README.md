@@ -37,3 +37,5 @@ input/output lists will be stored.
       self.fpath.touch()
   ```
   ````
+- Incorrect matches
+  - When adding "Terea" it matches "Tuerkischer Kaffee"
