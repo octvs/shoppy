@@ -7,13 +7,9 @@
     systems.url = "github:nix-systems/default";
   };
 
-  outputs = {
-    flake-parts,
-    systems,
-    ...
-  } @ inputs:
-    flake-parts.lib.mkFlake {inherit inputs;} ({...}: {
-      systems = import systems;
+  outputs = inputs:
+    inputs.flake-parts.lib.mkFlake {inherit inputs;} ({...}: {
+      systems = import inputs.systems;
       perSystem = {pkgs, ...}: let
         dependencies = with pkgs.python3.pkgs; [pyfzf termcolor] ++ [pkgs.jq];
       in {
