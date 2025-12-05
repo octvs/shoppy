@@ -24,6 +24,10 @@
         src = ./.;
         build-system = with py3.pkgs; [setuptools];
         dependencies = runtimeDeps;
+        nativeBuildInputs = [pkgs.installShellFiles];
+        postInstall = ''
+          installShellCompletion ${./src/_shoppy}
+        '';
       };
 
       devShells.default = pkgs.mkShell {buildInputs = runtimeDeps;};

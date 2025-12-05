@@ -1,0 +1,3 @@
+#compdef shoppy
+
+_arguments -C '1::command:(add check list edit)' '*:: :->args'
