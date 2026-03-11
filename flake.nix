@@ -11,7 +11,7 @@
     inputs.flake-parts.lib.mkFlake {inherit inputs;} ({...}: {
       systems = import inputs.systems;
       perSystem = {pkgs, ...}: let
-        dependencies = with pkgs.python3.pkgs; [pyfzf termcolor] ++ [pkgs.jq];
+        dependencies = with pkgs.python3.pkgs; [pyfzf termcolor pyyaml] ++ [pkgs.jq];
       in {
         packages.default = pkgs.python3Packages.buildPythonApplication {
           pname = "shoppy";

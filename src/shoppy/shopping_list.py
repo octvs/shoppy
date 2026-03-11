@@ -1,8 +1,8 @@
-import json
 import logging
 import os
 from pathlib import Path
 
+import yaml
 from pyfzf.pyfzf import FzfPrompt
 from termcolor import colored
 
@@ -27,7 +27,7 @@ class ShoppingList:
         if not self.data_path.is_dir():
             exit(f"Dir for shoppy doesn't exists!\nProvided: {self.data_path}")
         self.fpath = self.data_path.joinpath("shoppy_order.txt")
-        self.cat_fpath = self.data_path.joinpath("categories.json")
+        self.cat_fpath = self.data_path.joinpath("categories.yaml")
 
     def read_user_input(self):
         """Read user input while filtering empty lines"""
@@ -38,7 +38,7 @@ class ShoppingList:
     def read_categories(self):
         """Reads categories file, returns item map"""
         with open(self.cat_fpath, "r", encoding="utf-8") as f:
-            return json.load(f)
+            return yaml.load(f, Loader=yaml.Loader)
 
     def read_store_file(self):
         """Get store order"""
